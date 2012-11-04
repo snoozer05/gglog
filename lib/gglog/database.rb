@@ -113,7 +113,7 @@ module Gglog
     def filter_records(records)
       records.reject do |record|
         commit_message = record.key
-        commit_message.first_line =~ /^Merge pull request.*/
+        commit_message.first_line =~ /^Merge (pull request|branch).*/
       end
     end
 
