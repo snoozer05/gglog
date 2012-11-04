@@ -3,7 +3,7 @@ require 'rainbow'
 module Gglog
   module CommitMessageDecorator
     def display
-      first_line_display_width = 60
+      first_line_display_width = 70
       if string_display_width(first_line) < first_line_display_width
         body = sprintf("%-#{first_line_display_width}s", first_line)
       else
