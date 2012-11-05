@@ -62,4 +62,4 @@ I recommend you to use gglog in combination with [Clam.vim](https://github.com/s
 
 ---
 
-&copy; 2012 Koji Shimada.
+&copy; 2012 Koji Shimada, released under the MIT license
