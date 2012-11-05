@@ -5,5 +5,5 @@ require 'gglog'
 require 'tmpdir'
 
 Before do
-  GGLOG_HOME = Dir.mktmpdir
+  @gglog_home = Dir.mktmpdir
 end
