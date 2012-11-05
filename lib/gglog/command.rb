@@ -10,6 +10,13 @@ module Gglog
   class Command < Thor
     include Pager
 
+    class_option "gglog-home",   type: :string, aliases: "-h"
+
+    def initialize(*args)
+      super
+      @dot_gglog = options["gglog-home"] if options["gglog-home"]
+    end
+
     desc 'register [CLONE URL]', 'Register git repository on clone url to gglog target'
     def register(clone_url)
       repository_name = File.basename(clone_url, '.git')
@@ -78,7 +85,7 @@ module Gglog
 
     private
     def dot_gglog
-      File.expand_path("~/.gglog")
+      @dot_gglog ||= File.expand_path("~/.gglog")
     end
 
     def registered_repositories_path

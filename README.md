@@ -55,7 +55,6 @@ I recommend you to use gglog in combination with [Clam.vim](https://github.com/s
 
 ## Todo
 
-- Enable to set GGLOG_HOME
 - Improve commit message filter
 - Add tests.
 - Add diff to result of 'show'
