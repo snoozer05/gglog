@@ -33,10 +33,15 @@ module Gglog
 
     desc 'search [WORDS]', 'Search commit message'
     def search(words)
+      commit_messages = []
+
       setup_database unless File.exists?(db_home)
-      commit_messages = Gglog::Database.open(db_home, 'utf-8') do |db|
-        db.search(words).map {|cm| cm.extend CommitMessageDecorator }
+      Gglog::Database.open(db_home, 'utf-8') do |db|
+        commit_messages = db.search(words).map do |cm|
+          cm.extend CommitMessageDecorator
+        end
       end
+
       page
       commit_messages.each do |commit_message|
         say commit_message.display
@@ -49,6 +54,7 @@ module Gglog
       commit_message = repository.commit_message(sha).tap do |cm|
         cm.extend CommitMessageDecorator
       end
+
       page
       say commit_message.display_detail
     end
