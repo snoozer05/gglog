@@ -49,6 +49,13 @@ Show detail if you need:
 
 I recommend you to use gglog in combination with [Clam.vim](https://github.com/sjl/clam.vim).
 
+## Todo
+
+- Enable to set GGLOG_HOME
+- Improve commit message filter
+- Add tests.
+- Add diff to result of 'show'
+
 ---
 
 &copy; 2012 Koji Shimada.
