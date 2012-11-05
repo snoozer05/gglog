@@ -3,7 +3,7 @@ require 'thor'
 require 'rugged'
 require 'pager'
 require 'gglog/database'
-require 'gglog/commit_message'
+require 'gglog/repository'
 require 'gglog/commit_message_decorator'
 
 module Gglog
@@ -21,14 +21,11 @@ module Gglog
     desc 'register [CLONE URL]', 'Register git repository on clone url to gglog target'
     def register(clone_url)
       repository_name = File.basename(clone_url, '.git')
-      registration_path = File.join(registered_repositories_path, repository_name)
-      FileUtils.mkdir_p(registration_path)
-      Dir.chdir(registration_path) do
-        system "git", "clone", "--quiet", clone_url, registration_path
-      end
+      registration_path = repository_path(repository_name)
+      repository = Repository.checkout(clone_url, registration_path)
 
       Gglog::Database.open(db_home, 'utf-8') do |db|
-        commit_messages_on(registration_path).each do |commit_message|
+        repository.commit_messages.each do |commit_message|
           db.add_commit_message(commit_message)
         end
       end
@@ -37,7 +34,7 @@ module Gglog
     desc 'list', 'List git repositories of gglog target'
     def list
       registered_repositories.each do |repository|
-        say File.basename(repository)
+        say repository.name
       end
     end
 
@@ -54,8 +51,10 @@ module Gglog
 
     desc 'show [REPOSITORY_NAME] [SHA]', 'Show commit message'
     def show(repository_name, sha)
-      repository_path = File.join(registered_repositories_path, repository_name)
-      commit_message = commit_message(repository_path, sha)
+      repository = Repository.new(repository_path(repository_name))
+      commit_message = repository.commit_message(sha).tap do |cm|
+        cm.extend CommitMessageDecorator
+      end
       page
       say ''
       say commit_message.first_line.bright
@@ -67,16 +66,13 @@ module Gglog
     desc 'sync', 'Sync git repositories of gglog target'
     def sync
       registered_repositories.each do |repository|
-        Dir.chdir(repository) do
-          system "git", "reset", "--hard", "--quiet"
-          system "git", "pull", "--force", "--quiet", "origin", "master"
-        end
+        repository.pull
       end
 
       Gglog::Database.open(db_home, 'utf-8') do |db|
         db.recreate
         registered_repositories.each do |repository|
-          commit_messages_on(repository).each do |commit_message|
+          repository.commit_messages.each do |commit_message|
             db.add_commit_message(commit_message)
           end
         end
@@ -92,27 +88,17 @@ module Gglog
       File.join(dot_gglog, "repositories")
     end
 
+    def repository_path(name)
+      File.join(registered_repositories_path, name)
+    end
+
     def db_home
       File.join(dot_gglog, "db")
     end
 
     def registered_repositories
-      Dir[File.join(registered_repositories_path, "*")]
-    end
-
-    def commits_on(repository)
-      repo = Rugged::Repository.new(repository)
-      walker = Rugged::Walker.new(repo)
-      walker.push(repo.lookup(repo.head.target).oid)
-      walker.sorting(Rugged::SORT_REVERSE)
-      walker
-    end
-
-    def commit_messages_on(repository)
-      commits_on(repository).map do |commit|
-        commit_message =
-          CommitMessage.new_from_commit_object(commit, File.basename(repository))
-        commit_message.extend CommitMessageDecorator
+      Dir[File.join(registered_repositories_path, "*")].map do |path|
+        Repository.new(path)
       end
     end
 
