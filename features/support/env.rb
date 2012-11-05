@@ -6,4 +6,5 @@ require 'tmpdir'
 
 Before do
   @gglog_home = Dir.mktmpdir
+  @aruba_timeout_seconds = 10
 end

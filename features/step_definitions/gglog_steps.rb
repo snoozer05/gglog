@@ -18,6 +18,10 @@ end
   run_simple("gglog show #{unescape(repository_name_and_sha)} -h #{@gglog_home}", false)
 end
 
+もし /^Gitリポジトリ"(.*?)"を登録する$/ do |url|
+  run_simple("gglog register #{unescape(url)} -h #{@gglog_home}", false)
+end
+
 ならば /^検索結果にコミットメッセージ"(.*?)"が含まれていること$/ do |expected|
   assert_partial_output(expected, all_output)
 end
@@ -28,4 +32,8 @@ end
 
 ならば /^詳細表示に"(.*?)"が含まれていること$/ do |expected|
   assert_partial_output(expected, all_output)
+end
+
+ならば /^登録リポジトリに"(.*?)"が追加されていること$/ do |expected|
+  Dir["#{@gglog_home}/repositories/*"].include?("#{@gglog_home}/repositories/#{expected}")
 end
