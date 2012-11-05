@@ -10,6 +10,15 @@ end
   run_simple("gglog search #{unescape(keyword)} -h #{GGLOG_HOME}", false)
 end
 
+もし /^list サブコマンドを実行する$/ do
+  run_simple("gglog list -h #{GGLOG_HOME}", false)
+end
+
 ならば /^検索結果にコミットメッセージ"(.*?)"が含まれていること$/ do |expected|
   assert_partial_output(expected, all_output)
 end
+
+ならば /^一覧に"(.*?)"が含まれていること$/ do |expected|
+  assert_partial_output(expected, all_output)
+end
+
