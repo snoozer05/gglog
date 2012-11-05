@@ -4,7 +4,7 @@ gglog is your partner for finding a good commit message.
 
 ## Motivation
 
-(Sorry, only Japanese information is available)
+(Japanese version only)
 
 >「コミットメッセージに悩んだときに、いろんなリポジトリを横断してコミットメッセージを眺めることができたらいいな」
 
@@ -59,6 +59,7 @@ I recommend you to use gglog in combination with [Clam.vim](https://github.com/s
 - Improve commit message filter
 - Add tests.
 - Add diff to result of 'show'
+- Translate Motivation section to English
 
 ---
 
