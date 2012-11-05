@@ -56,11 +56,7 @@ module Gglog
         cm.extend CommitMessageDecorator
       end
       page
-      say ''
-      say commit_message.first_line.bright
-      say ''
-      say commit_message.body
-      say ''
+      say commit_message.display_detail
     end
 
     desc 'sync', 'Sync git repositories of gglog target'

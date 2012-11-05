@@ -1,5 +1,6 @@
 #coding: utf-8
 require 'rainbow'
+
 module Gglog
   module CommitMessageDecorator
     def display
@@ -11,6 +12,10 @@ module Gglog
       end
       prefix = sprintf("%50s", "#{File.basename(repository)} #{sha}".color("333333"))
       "  #{body} #{prefix}"
+    end
+
+    def display_detail
+      "\n#{first_line.bright}\n\n#{body}\n\n"
     end
 
     def string_display_width(string)
