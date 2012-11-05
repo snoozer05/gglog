@@ -49,6 +49,10 @@ Show detail if you need:
     or the list of objects or not.
     ...
 
+Make registered projects follow origin/master and re-index.
+
+    % gglog sync
+
 ## For Vim user
 
 I recommend you to use gglog in combination with [Clam.vim](https://github.com/sjl/clam.vim).
