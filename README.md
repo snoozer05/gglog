@@ -18,6 +18,10 @@ gglog is your partner for finding a good commit message.
 
 - 参考: [ククログ - コミットメッセージの書き方](http://www.clear-code.com/blog/2012/2/21.html)
 
+## Requirements
+
+- [Ruby](http://www.ruby-lang.org/) (1.9.3 or later)
+
 ## Installation
 
     % gem install gglog
