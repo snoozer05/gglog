@@ -45,6 +45,10 @@ Show detail if you need:
     or the list of objects or not.
     ...
 
+## For Vim user
+
+I recommend you to use gglog in combination with [Clam.vim](https://github.com/sjl/clam.vim).
+
 ---
 
 &copy; 2012 Koji Shimada.
