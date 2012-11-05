@@ -10,20 +10,13 @@ module Gglog
   class Command < Thor
     include Pager
 
-    desc 'init', 'Initialize gglog'
-    def init
-      FileUtils.mkdir_p(db_home)
-      Gglog::Database.open(db_home, 'utf-8') do |db|
-        db.recreate
-      end
-    end
-
     desc 'register [CLONE URL]', 'Register git repository on clone url to gglog target'
     def register(clone_url)
       repository_name = File.basename(clone_url, '.git')
       registration_path = repository_path(repository_name)
       repository = Repository.checkout(clone_url, registration_path)
 
+      setup_database unless File.exists?(db_home)
       Gglog::Database.open(db_home, 'utf-8') do |db|
         repository.commit_messages.each do |commit_message|
           db.add_commit_message(commit_message)
@@ -40,6 +33,7 @@ module Gglog
 
     desc 'search [WORDS]', 'Search commit message'
     def search(words)
+      setup_database unless File.exists?(db_home)
       commit_messages = Gglog::Database.open(db_home, 'utf-8') do |db|
         db.search(words).map {|cm| cm.extend CommitMessageDecorator }
       end
@@ -65,6 +59,7 @@ module Gglog
         repository.pull
       end
 
+      setup_database unless File.exists?(db_home)
       Gglog::Database.open(db_home, 'utf-8') do |db|
         db.recreate
         registered_repositories.each do |repository|
@@ -98,10 +93,11 @@ module Gglog
       end
     end
 
-    def commit_message(repository, sha)
-      repo = Rugged::Repository.new(repository)
-      commit = repo.lookup(sha)
-      CommitMessage.new_from_commit_object(commit, File.basename(repository))
+    def setup_database
+      FileUtils.mkdir_p(db_home)
+      Gglog::Database.open(db_home, 'utf-8') do |db|
+        db.recreate
+      end
     end
   end
 end
