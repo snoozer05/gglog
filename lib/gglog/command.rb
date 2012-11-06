@@ -64,6 +64,7 @@ module Gglog
 
       page
       say commit_message.display_detail
+      say repository.diff(sha)
     end
 
     desc 'sync', 'Sync git repositories of gglog target'

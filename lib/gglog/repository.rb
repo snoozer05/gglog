@@ -34,6 +34,12 @@ module Gglog
       CommitMessage.new_from_commit_object(commit, name)
     end
 
+    def diff(sha)
+      Dir.chdir(@path) do
+        system "git", "diff", sha
+      end
+    end
+
     def pull
       Dir.chdir(@path) do
         system "git", "reset", "--hard", "--quiet"
