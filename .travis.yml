@@ -1,0 +1,8 @@
+notifications:
+  recipients:
+    - koji.shimada@enishi-tech.com
+language: ruby
+rvm:
+  - 1.9.3
+before_install:
+  - curl https://raw.github.com/groonga/groonga/master/data/travis/setup.sh | sh
