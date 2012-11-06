@@ -1,4 +1,4 @@
-# gglog
+# gglog [![Build Status](https://secure.travis-ci.org/snoozer05/gglog.png)](http://travis-ci.org/snoozer05/gglog)
 
 gglog is your partner for finding a good commit message.
 
