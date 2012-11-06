@@ -1,5 +1,5 @@
 #coding: utf-8
-require "Gglog/command"
+require "gglog/command"
 
 module Gglog
 end
