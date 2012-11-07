@@ -29,14 +29,9 @@ module Gglog
       end
     end
 
-    def commit_message(sha)
-      commit = @repo.lookup(sha)
-      CommitMessage.new_from_commit_object(commit, name)
-    end
-
-    def diff(sha)
+    def show(sha)
       Dir.chdir(@path) do
-        system "git", "diff", sha
+        system "git", "show", sha
       end
     end
 
