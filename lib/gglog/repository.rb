@@ -37,7 +37,7 @@ module Gglog
     def pull
       Dir.chdir(@path) do
         system "git", "reset", "--hard", "--quiet"
-        system "git", "pull", "--force", "--quiet", "origin", "master"
+        system "git", "pull", "--force", "--quiet", "origin", "HEAD"
       end
     end
 
