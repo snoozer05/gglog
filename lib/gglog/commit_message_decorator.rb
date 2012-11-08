@@ -14,10 +14,6 @@ module Gglog
       "  #{body} #{prefix}"
     end
 
-    def display_detail
-      "\n#{first_line.bright}\n\n#{body}\n\n"
-    end
-
     def string_display_width(string)
       string.each_char.map{|char| char_display_width(char) }.inject(0, &:+)
     end

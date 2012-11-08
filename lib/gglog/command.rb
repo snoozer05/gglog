@@ -58,12 +58,9 @@ module Gglog
     desc 'show [REPOSITORY_NAME] [SHA]', 'Show commit message'
     def show(repository_name, sha)
       repository = Repository.new(repository_path(repository_name))
-      commit_message = repository.commit_message(sha).tap do |cm|
-        cm.extend CommitMessageDecorator
-      end
 
       page
-      say commit_message.display_detail
+      say repository.show(sha)
     end
 
     desc 'sync', 'Sync git repositories of gglog target'
