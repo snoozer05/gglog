@@ -60,7 +60,6 @@ I recommend you to use gglog in combination with [Clam.vim](https://github.com/s
 ## Todo
 
 - Improve commit message filter
-- Add diff to result of 'show'
 - Translate Motivation section to English
 
 ---
