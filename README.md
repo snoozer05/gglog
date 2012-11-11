@@ -28,7 +28,7 @@ gglog is your partner for finding a good commit message.
 
 ## Usage
 
-Register github projects to your seaech targets:
+Register github projects to your search targets:
 
     % gglog register https://github.com/rails/rails.git
 
