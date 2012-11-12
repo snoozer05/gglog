@@ -1,9 +1,16 @@
 #coding: utf-8
+
 前提 /^以下のGitリポジトリが登録されている:$/ do |table|
   command = Gglog::Command.new([], {"gglog-home" => @gglog_home})
   table.hashes.each do |row|
     command.register(row['URL'])
   end
+end
+
+前提 /^テスト用のGitリポジトリ"(.*?)"が登録されている$/ do |repository_name|
+  test_repo = decompress_test_repository(repository_name)
+  git_url = File.join(test_repo, "#{repository_name}.git")
+  step %Q{Gitリポジトリ"#{git_url}"を登録する}
 end
 
 もし /^キーワード"(.*?)"で検索を行なう$/ do |keyword|
@@ -20,6 +27,10 @@ end
 
 もし /^Gitリポジトリ"(.*?)"を登録する$/ do |url|
   run_simple("gglog register #{unescape(url)} -h #{@gglog_home}", false)
+end
+
+もし /^テスト用のGitリポジトリ"(.*?)"を登録する$/ do |repository_name|
+  step %Q{テスト用のGitリポジトリ"#{repository_name}"が登録されている}
 end
 
 ならば /^検索結果にコミットメッセージ"(.*?)"が含まれていること$/ do |expected|

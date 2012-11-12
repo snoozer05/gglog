@@ -2,8 +2,6 @@
 フィーチャ: 登録しているGitリポジトリのコミットメッセージを検索したい
 
   シナリオ: 登録済みのGitリポジトリに含まれるコミットメッセージを検索できること
-    前提 以下のGitリポジトリが登録されている:
-      | URL |
-      | https://github.com/snoozer05/gglog.git |
-    もし キーワード".gitignore"で検索を行なう
-    ならば 検索結果にコミットメッセージ"Add .gitignore"が含まれていること
+    前提 テスト用のGitリポジトリ"gglog_test_repository"が登録されている
+    もし キーワード"Initial"で検索を行なう
+    ならば 検索結果にコミットメッセージ"Initial commit"が含まれていること
