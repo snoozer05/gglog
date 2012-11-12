@@ -61,6 +61,8 @@ module Gglog
 
       page
       say repository.show(sha)
+    rescue
+      say "Failed: repository name or sha is incorrect"
     end
 
     desc 'sync', 'Sync git repositories of gglog target'
