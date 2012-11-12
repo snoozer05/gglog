@@ -37,16 +37,20 @@ end
   run_simple("gglog sync -h #{@gglog_home}", false)
 end
 
-ならば /^検索結果にコミットメッセージ"(.*?)"が含まれていること$/ do |expected|
+ならば /^結果表示に"(.*?)"が含まれていること$/ do |expected|
   assert_partial_output(expected, all_output)
+end
+
+ならば /^検索結果にコミットメッセージ"(.*?)"が含まれていること$/ do |expected|
+  step %Q{結果表示に"#{expected}"が含まれていること}
 end
 
 ならば /^一覧に"(.*?)"が含まれていること$/ do |expected|
-  assert_partial_output(expected, all_output)
+  step %Q{結果表示に"#{expected}"が含まれていること}
 end
 
 ならば /^詳細表示に"(.*?)"が含まれていること$/ do |expected|
-  assert_partial_output(expected, all_output)
+  step %Q{結果表示に"#{expected}"が含まれていること}
 end
 
 ならば /^登録リポジトリに"(.*?)"が追加されていること$/ do |expected|
