@@ -33,6 +33,10 @@ end
   step %Q{テスト用のGitリポジトリ"#{repository_name}"が登録されている}
 end
 
+もし /^sync サブコマンドを実行する$/ do
+  run_simple("gglog sync -h #{@gglog_home}", false)
+end
+
 ならば /^検索結果にコミットメッセージ"(.*?)"が含まれていること$/ do |expected|
   assert_partial_output(expected, all_output)
 end
@@ -47,4 +51,12 @@ end
 
 ならば /^登録リポジトリに"(.*?)"が追加されていること$/ do |expected|
   Dir["#{@gglog_home}/repositories/*"].include?("#{@gglog_home}/repositories/#{expected}")
+end
+
+ならば /^"(.*?)"リポジトリの状態が最新になっていること$/ do |repository_name|
+  repo = File.join(@gglog_home, "repositories", repository_name)
+  Dir.chdir(repo) do
+    run_simple("git pull --force --quiet origin HEAD", false)
+  end
+  assert_partial_output("Already up-to-date.", all_output)
 end
