@@ -1,3 +1,8 @@
+## 0.0.2 (2012-11-29)
+
+* include diff in the result of 'show' sub-command
+* fix the branch specified as 'git pull' (master -> HEAD) [Patch by @tricknotes]
+
 ## 0.0.1 (2012-11-06)
 
 * first release
