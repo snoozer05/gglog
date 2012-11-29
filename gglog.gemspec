@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.version     = Gglog::VERSION
   s.authors     = ["SHIMADA Koji"]
   s.email       = ["koji.shimada@enishi-tech.com"]
-  s.homepage    = "http://gglog.github.com/"
+  s.homepage    = "https://github.com/snoozer05/gglog"
   s.summary     = %q{Your partner for finding a good commit message.}
   s.description = %q{Your partner for finding a good commit message.}
 
