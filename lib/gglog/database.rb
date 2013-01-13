@@ -42,6 +42,10 @@ module Gglog
         { key: "repository", order: 'ascending' },
         { key: "first_line", order: 'ascending' }
       ])
+      # convert to Array from Groonga::Array to keep before 2.1.0 style
+      #  see http://ranguba.org/rroonga/ja/Groonga/Table.html#sort-instance_method
+      records = records.collect {|record| record.value }
+
       filtered_records = filter_records(records)
       convert_records_to_commit_messages(filtered_records)
     end
