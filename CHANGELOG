@@ -1,3 +1,7 @@
+## 0.0.3 (2013-01-14)
+
+* fix incompatible api problem for rroonga 2.1.0 [Reported by @ursm]
+
 ## 0.0.2 (2012-11-29)
 
 * include diff in the result of 'show' sub-command
