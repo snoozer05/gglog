@@ -5,7 +5,7 @@ PATH
       bundler (>= 1.2)
       pager
       rainbow
-      rroonga (>= 2.0.6)
+      rroonga (>= 2.1.0)
       rugged (>= 0.16.0)
       thor (>= 0.16.0)
 
@@ -37,7 +37,7 @@ GEM
     pkg-config (1.1.4)
     rainbow (1.1.4)
     rake (0.9.2.2)
-    rroonga (2.0.6)
+    rroonga (2.1.2)
       archive-zip
       json
       pkg-config
