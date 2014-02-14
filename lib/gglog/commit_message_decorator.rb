@@ -1,5 +1,5 @@
 #coding: utf-8
-require 'rainbow'
+require 'rainbow/ext/string'
 
 module Gglog
   module CommitMessageDecorator
