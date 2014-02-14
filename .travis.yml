@@ -3,7 +3,7 @@ notifications:
     - koji.shimada@enishi-tech.com
 language: ruby
 rvm:
-  - 1.9.3
+  - 2.1.0
 before_install:
   - gem install bundler
   - curl https://raw.github.com/groonga/groonga/master/data/travis/setup.sh | sh
