@@ -45,7 +45,7 @@ module Gglog
     private
     def commits
       walker = Rugged::Walker.new(@repo)
-      walker.push(@repo.lookup(@repo.head.target).oid)
+      walker.push(@repo.lookup(@repo.head.target_id).oid)
       walker.sorting(Rugged::SORT_REVERSE)
       walker
     end
