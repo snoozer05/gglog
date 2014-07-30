@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    gglog (0.0.5)
+    gglog (0.0.6)
       bundler (>= 1.2)
       pager
       rainbow
